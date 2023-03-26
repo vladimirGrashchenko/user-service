@@ -1,4 +1,4 @@
-package com.grashchenko.userservice.Exception;
+package com.grashchenko.userservice.exception;
 
 import lombok.AllArgsConstructor;
 import lombok.Getter;
