@@ -5,6 +5,7 @@ import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
+import org.hibernate.annotations.GenericGenerator;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -27,7 +28,8 @@ import java.util.UUID;
 public class User {
 
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(generator = "UUID")
+    @GenericGenerator(name = "UUID", strategy = "org.hibernate.id.UUIDGenerator")
     @Column(name = "id")
     private UUID id;
 
@@ -46,19 +48,19 @@ public class User {
     @Column(name = "birth_date")
     private LocalDate birthDate;
 
-    @Column(name = "passport_number")
-    @Pattern(regexp = "\\d{4} \\d{6}")
+    @Column(name = "passport_number", unique = true)
+    @Pattern(regexp = "\\d{4} \\d{6}", message = "Passport number must be in the format ХХХХ ХХХХХХ")
     private String passportNumber;
 
     @Column(name = "born_place")
     private String bornPlace;
 
-    @Column(name = "mobile_phone")
+    @Column(name = "mobile_phone", unique = true)
     @Pattern(regexp = "^7\\d{10}$", message = "Phone number must be in the format 7XXXXXXXXXX")
     private String mobilePhone;
 
     @Column(name = "email")
-    @Email(message = "Email should be valid")
+    @Email(message = "Must be in the email format")
     private String email;
 
     @Column(name = "registration_address")

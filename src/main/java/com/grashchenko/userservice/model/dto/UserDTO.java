@@ -25,7 +25,7 @@ public class UserDTO {
 
     private LocalDate birthDate;
 
-    @Pattern(regexp = "\\d{4} \\d{6}")
+    @Pattern(regexp = "\\d{4} \\d{6}", message = "Passport number must be in the format ХХХХ ХХХХХХ")
     private String passportNumber;
 
     private String bornPlace;
@@ -33,7 +33,7 @@ public class UserDTO {
     @Pattern(regexp = "^7\\d{10}$", message = "Phone number must be in the format 7XXXXXXXXXX")
     private String mobilePhone;
 
-    @Email
+    @Email(message = "Must be in the email format")
     private String email;
 
     private String registrationAddress;

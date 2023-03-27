@@ -39,9 +39,9 @@ public class UserServiceImpl implements UserService {
     }
 
     public UserDTO get(UUID id) {
-        log.info("get client with id {}", id);
         User user = userRepository.findById(id).orElseThrow(() ->
-                new StorageDataNotFoundException("Client not found"));
+                new StorageDataNotFoundException("Client with id " + id + " not found"));
+        log.info("get client with id {}", id);
         return userMapper.toUserDTO(user);
     }
 
@@ -50,10 +50,9 @@ public class UserServiceImpl implements UserService {
                                      String middleName,
                                      String mobilePhone,
                                      String email) {
-        log.info("search client");
         checkSearchFields(lastName, firstName, middleName, mobilePhone, email);
+        log.info("search client");
         return userMapper.toDtoes(userRepository.searchUsers(lastName,
-                firstName, middleName, mobilePhone, email).orElseThrow(() ->
-                new StorageDataNotFoundException("Client not found")));
+                firstName, middleName, mobilePhone, email));
     }
 }

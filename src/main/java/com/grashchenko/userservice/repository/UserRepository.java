@@ -7,7 +7,6 @@ import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;
-import java.util.Optional;
 import java.util.UUID;
 
 @Repository
@@ -18,7 +17,7 @@ public interface UserRepository extends JpaRepository<User, UUID> {
             "AND (:middleName IS NULL OR u.middleName = :middleName) " +
             "AND (:mobilePhone IS NULL OR u.mobilePhone = :mobilePhone) " +
             "AND (:email IS NULL OR u.email = :email)")
-    Optional<List<User>> searchUsers(@Param("lastName") String lastName,
+    List<User> searchUsers(@Param("lastName") String lastName,
                            @Param("firstName") String firstName,
                            @Param("middleName") String middleName,
                            @Param("mobilePhone") String mobilePhone,
